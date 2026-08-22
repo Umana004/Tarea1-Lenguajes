@@ -13,4 +13,4 @@ class Partida {
     }
 }
 
-moodule.exports = Partida;
+module.exports = Partida;

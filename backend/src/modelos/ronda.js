@@ -12,4 +12,4 @@ class Ronda {
 
 }
 
-moodule.exports = Ronda;
+module.exports = Ronda;
