@@ -3,16 +3,35 @@ const Partida = require("../modelos/partida");
 const Ronda = require("../modelos/ronda");
 const servicio_palabras = require("./servicio_palabras");
 const servicio_intentos = require("./servicio_intentos");
+const partidas = require("../datos/partidas");
+
+let siguiente_id_partida = 1;
 
 function crear_partida(nombre_jugador_1, nombre_jugador_2) {
     const jugador_1 = new Jugador(nombre_jugador_1);
     const jugador_2 = new Jugador(nombre_jugador_2);
 
+    let partida;
+
     if (Math.random() < 0.5) {
-        return new Partida(jugador_1, jugador_2);
+        partida = new Partida(
+            siguiente_id_partida,
+            jugador_1,
+            jugador_2
+        );
+    } else {
+        partida = new Partida(
+            siguiente_id_partida,
+            jugador_2,
+            jugador_1
+        );
     }
 
-    return new Partida(jugador_2, jugador_1);
+    siguiente_id_partida++;
+
+    partidas.push(partida);
+
+    return partida;
 }
 
 function crear_ronda(jugador_adivinador) {
@@ -30,6 +49,8 @@ function iniciar_ronda(partida, jugador_adivinador) {
     const ronda = crear_ronda(jugador_adivinador);
 
     partida.rondas.push(ronda);
+
+    partida.ronda_actual = partida.rondas.length - 1;
 
     return ronda;
 }
