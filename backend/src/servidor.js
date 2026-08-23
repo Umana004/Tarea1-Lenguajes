@@ -1,15 +1,14 @@
 const express = require("express");
+const rutas_partida = require("./rutas/rutas_partida");
 
-const aplicacion = express();
+const app = express();
 
-const puerto = 3000;
+app.use(express.json());
 
-aplicacion.get("/api/prueba", (solicitud, respuesta) => {
-    respuesta.json({
-        mensaje: "Backend funcionando"
-    });
-});
+app.use("/api", rutas_partida);
 
-aplicacion.listen(puerto, () => {
-    console.log(`Servidor ejecutándose en http://localhost:${puerto}`);
+const PUERTO = 3000;
+
+app.listen(PUERTO, () => {
+    console.log(`Servidor ejecutándose en http://localhost:${PUERTO}`);
 });
