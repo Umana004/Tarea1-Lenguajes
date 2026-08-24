@@ -35,7 +35,8 @@ function crear_partida(nombre_jugador_1, nombre_jugador_2) {
 }
 
 function crear_ronda(jugador_adivinador) {
-    const palabra_secreta = servicio_palabras.obtener_palabra_aleatoria();
+    const palabra_secreta =
+        servicio_palabras.obtener_palabra_aleatoria();
 
     const ronda = new Ronda(
         jugador_adivinador,
@@ -62,9 +63,20 @@ function procesar_intento(ronda, intento) {
     );
 }
 
+function obtener_partida(id) {
+    for (let i = 0; i < partidas.length; i++) {
+        if (partidas[i].id === id) {
+            return partidas[i];
+        }
+    }
+
+    return null;
+}
+
 module.exports = {
     crear_partida,
     crear_ronda,
     iniciar_ronda,
-    procesar_intento
+    procesar_intento,
+    obtener_partida
 };
